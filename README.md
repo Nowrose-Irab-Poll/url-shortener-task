@@ -134,12 +134,6 @@ This structure is chosen because:
   - The counter guarantees uniqueness because it increments monotonically.
   - Each numeric value corresponds to a unique Base62 string, eliminating the risk of collision.
 
-### Persistent Storage:
-In production, the in-memory Map should be replaced or augmented with a database like:
-
-- Redis (for fast, in-memory key-value storage).
-- PostgreSQL/MySQL (for persistent relational data storage).
- 
 
 ## Techniques to Ensure Short URLs Are Unique and Avoid Conflicts
 Incrementing Counter with Offset:
@@ -160,3 +154,19 @@ So, the incremental Unique Id generation inherently avoids conflict and relieves
 
 - Handle requests with invalid short URL keys by returning meaningful errors (e.g., "Short URL not found").
 - Reject invalid or malformed long URLs during insertion.
+
+
+## Future Improvements:
+
+- Persistent Storage
+  - Currently, the application uses an in-memory Map for storing URL mappings, which is lost when the application restarts.
+  - To ensure durability and scalability, integrate a persistent storage solution like:
+    - Redis (for fast, in-memory key-value storage).
+    - PostgreSQL/MySQL (for persistent relational data storage).
+
+- Caching Strategies for Reads
+  - Frequently accessed short URLs can benefit from caching to reduce database load and improve response times.
+  - Implement caching mechanisms such as:
+    - In-Memory Cache (Redis): Cache popular short URL lookups with a time-to-live (TTL) to ensure freshness.
+    - Least Recently Used (LRU) Cache: Use an LRU cache for efficient memory management and to handle high read traffic.
+    - Edge Caching with CDNs: Cache URL redirections at the edge (e.g., Cloudflare, AWS CloudFront) for global availability and reduced latency.
