@@ -140,3 +140,21 @@ In production, the in-memory Map should be replaced or augmented with a database
 - Redis (for fast, in-memory key-value storage).
 - PostgreSQL/MySQL (for persistent relational data storage).
  
+
+## Techniques to Ensure Short URLs Are Unique and Avoid Conflicts
+Incrementing Counter with Offset:
+
+- The counter starts at counterOffset, ensuring all generated short URLs meet the 6-character requirement.
+- Incrementing the counter guarantees that each Base62-encoded value is unique.
+- This ensures every shortUrl generated to be unique.
+
+
+## Handling Edge Cases:
+
+- Counter Overflow: Add logic to detect when the counter exceeds Number.MAX_SAFE_INTEGER and reset or switch to a BigInt-based system.
+- Invalid Short Keys: Validate short URL keys using regex to ensure they conform to Base62 rules.
+
+## Error Handling:
+
+- Handle requests with invalid short URL keys by returning meaningful errors (e.g., "Short URL not found").
+- Reject invalid or malformed long URLs during insertion.
