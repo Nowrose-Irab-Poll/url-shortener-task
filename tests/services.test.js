@@ -61,17 +61,6 @@ describe('Base62Codec', () => {
             expect(second.shortUrlKey).toBe('baaaab');
         });
 
-        // test('throws error for counter overflow', () => {
-        //     Base62Codec.counter = Number.MAX_SAFE_INTEGER - 1;
-        //     const first = Base62Codec.generateShortUrl();
-        //     expect(first.uid).toBe(Number.MAX_SAFE_INTEGER - 1);
-
-        //     const second = Base62Codec.generateShortUrl();
-        //     expect(second.uid).toBe(Number.MAX_SAFE_INTEGER);
-
-        //     // After MAX_SAFE_INTEGER, expect error or specific behavior
-        //     expect(() => Base62Codec.generateShortUrl()).toThrow(); // Adjust if specific handling is implemented
-        // });
     });
 });
 
