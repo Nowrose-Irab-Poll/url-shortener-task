@@ -148,9 +148,11 @@ Incrementing Counter with Offset:
 - Incrementing the counter guarantees that each Base62-encoded value is unique.
 - This ensures every shortUrl generated to be unique.
 
+So, the incremental Unique Id generation inherently avoids conflict and relieves us from extra burden of rechecking for duplicate Id generation.
 
 ## Handling Edge Cases:
 
+- Invalid Long URLs: Validate the URL provided before shortening. 
 - Counter Overflow: Add logic to detect when the counter exceeds Number.MAX_SAFE_INTEGER and reset or switch to a BigInt-based system.
 - Invalid Short Keys: Validate short URL keys using regex to ensure they conform to Base62 rules.
 

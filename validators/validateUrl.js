@@ -1,8 +1,10 @@
+// Ensure URL validation
 const validateUrl = (url) => {
     const regex = /^(https?:\/\/)?([a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+)(:[0-9]+)?(\/.*)?$/;
     return regex.test(url);
 };
 
+// Ensure base62 Unique Id validation
 const validateShortUrlKey = (shortUrlKey) => {
     if (shortUrlKey.length < 6) return false; // Ensure minimum length
 
